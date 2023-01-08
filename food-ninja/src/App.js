@@ -1,9 +1,9 @@
-import Foodcard from './component/foodcard/card';
-import Header from './component/navbar/header';
+import Body from './component/Body';
+import Header from './component/navbar/Header';
 function App() {
 	return(<>
   <Header />
-  <Foodcard />
+  <Body />
   </>) 
 }
 
