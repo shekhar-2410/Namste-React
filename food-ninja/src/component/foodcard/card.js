@@ -4,11 +4,13 @@ import { IMG_Url } from '../../config/config';
 
 const Foodcard = ({ cloudinaryImageId, name, cuisines, avgRating }) => {
 	return (
-		<div class="group box-border h-60 w-60 border-2 md:shadow-xl m-6 p-2 hover:bg-red-600  rounded-md">
-			<img src={IMG_Url + cloudinaryImageId} />
-			<h2 class="group-hover:text-white">{name || 'Resturants'}</h2>
-			<p class="text-sm group-hover:text-white">{cuisines + ', ' || 'Food Type'}</p>
-			<p class="text-sm group-hover:text-white">{avgRating} ⭐</p>
+		<div className="group box-border h-full w-1/4 border-2 md:shadow-xl m-6  hover:bg-red-600  rounded-lg">
+			<img className="rounded-lg" src={IMG_Url + cloudinaryImageId} />
+			<div className="p-10">
+				<h2 className="group-hover:text-white">{name || 'Resturants'}</h2>
+				<p className="text-sm group-hover:text-white">{cuisines + ', ' || 'Food Type'}</p>
+				<p className="text-sm group-hover:text-white">{avgRating} ⭐</p>
+			</div>
 		</div>
 	);
 };
