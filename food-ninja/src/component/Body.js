@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Card from '../component/foodcard/Card';
 // import { RestrauntList } from '../config/config';
-import Picker from 'emoji-picker-react';
 import Simmer from './Simmer';
 
 // function filterData(change,restaurants){
@@ -29,9 +28,8 @@ const Body = () => {
       const getRestaurants = async () =>{
        const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
        const  json = await data.json();
-       setTimeout(function(){
        setRestaurant(json?.data?.cards[2]?.data?.data?.cards)
-       },5000)
+       
       }
 //not render component early return
 if (!restaurants) return null;
@@ -58,7 +56,7 @@ if (!restaurants) return null;
              </button> */}
         </div>
 
-			<div class={'flex flex-wrap justify-center'}>
+			<div className={'flex flex-wrap justify-center'}>
 				{filterData.map((resturant) => {
 					return <Card {...resturant.data} key={resturant.data.id} />;
 				})}
