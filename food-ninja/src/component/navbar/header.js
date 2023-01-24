@@ -14,9 +14,9 @@ const navItem = [
             id:2,
             url: '/about'},
             {
-                name: 'Food & Drink',
+                name: 'Contact Us',
                 id:3,
-                url: '/'},
+                url: '/contact'},
                 {
                     btn_1: 'Login',
                     id:4,

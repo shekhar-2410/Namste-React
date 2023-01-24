@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useState} from 'react';
 import Card from '../component/foodcard/Card';
-// import { RestrauntList } from '../config/config';
+import { filterData } from './utility/helper';
 import Simmer from './Simmer';
+import { Link } from 'react-router-dom';
 
 // function filterData(change,restaurants){
 // const filterData = restaurants.filter((restaurant)=>restaurant.data.name.includes(change)  
@@ -10,14 +11,17 @@ import Simmer from './Simmer';
 // }
 const Body = () => {
     const [change, setChange] = React.useState('');
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [restaurants,setRestaurant] = React.useState([])
     const handleChange = (event)=>{
         setChange(event.target.value)
     }
-    const filterData = !change? 
-    restaurants: 
-    restaurants.filter((resturant)=>(resturant?.data?.name.toLowerCase()).includes(change.toLowerCase())
-    )
+    
+             //     can direct filter resturant on search bar without using search btn
+          //    const filterData = !change? 
+            // restaurants: 
+            // restaurants.filter((resturant)=>(resturant?.data?.name.toLowerCase()).includes(change.toLowerCase())
+              // )
     
     useEffect(() => {
         // API call
@@ -29,6 +33,7 @@ const Body = () => {
        const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
        const  json = await data.json();
        setRestaurant(json?.data?.cards[2]?.data?.data?.cards)
+       setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards)
        
       }
 //not render component early return
@@ -36,30 +41,42 @@ if (!restaurants) return null;
 
 	return restaurants?.length === 0 ?(<Simmer/>):(
 		<>
-			<div>
-        {filterData.length===0 ? ('No Resturant Available 🙁'):(null)}
+			<div className='pl-4'>
+        {filteredRestaurants.length===0 ? ('No Resturant Available 🙁'):(null)}
         <br/>
-            <input class={'w-1/4 box-border h-10 my-4 ml-12  py-6 px-2 border-2 md:shadow-md  border-gray-300 rounded-md'} 
+            <input class={'w-1/4 box-border h-10 my-4 ml-28 mr-4  py-6 px-2 border-2 md:shadow-md  border-gray-300 rounded-md'} 
             type={'text'}
              placeholder={"Search here.."}
               value = {change}
             onChange={handleChange}
             />
             
-            {/* <button type="button" onClick={()=>{
+            <button type="button" onClick={()=>{
                 const data = filterData(change,restaurants)
-               setRestaurant(data)
+                setFilteredRestaurants(data)
                 
             }}
-            class="bg-gray-300 h-9 w-auto px-4 rounded-sm  md:shadow-md motion-safe:hover:-translate-x-0.5 motion-safe:transition">
+            class="bg-red-600 text-white h-12 w-24 px-4 rounded-sm  md:shadow-md motion-safe:hover:-translate-x-0.5 motion-safe:transition">
           Search 
-             </button> */}
+             </button>
         </div>
 
-			<div className={'flex flex-wrap justify-center'}>
-				{filterData.map((resturant) => {
-					return <Card {...resturant.data} key={resturant.data.id} />;
-				})}
+			<div className='flex flex-wrap mx-24'>
+				{filteredRestaurants.map((resturant) => (
+         
+           
+               <Link
+              to={"/restaurant/" + resturant.data.id}
+              key={resturant.data.id}
+            >
+              <Card {...resturant.data} />
+            </Link>
+          
+           
+             )
+           
+           
+				)}
 			</div>
 		</>
 	);
