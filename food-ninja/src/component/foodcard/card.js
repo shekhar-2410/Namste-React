@@ -8,7 +8,7 @@ const Foodcard = ({ cloudinaryImageId, name, cuisines, avgRating }) => {
 			<img className="rounded-lg" src={IMG_Url + cloudinaryImageId} />
 			<div className="p-10">
 				<h2 className="group-hover:text-white">{name || 'Resturants'}</h2>
-				<p className="w-44 text-sm group-hover:text-white">{cuisines + ', ' || 'Food Type'}</p>
+				<p className="w-[44] text-sm group-hover:text-white">{cuisines + ', ' || 'Food Type'}</p>
 				<p className="text-sm group-hover:text-white">{avgRating} ⭐</p>
 			</div>
 		</div>

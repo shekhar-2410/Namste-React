@@ -56,7 +56,7 @@ if (!restaurants) return null;
                 setFilteredRestaurants(data)
                 
             }}
-            class="bg-red-600 text-white h-12 w-24 px-4 rounded-sm  md:shadow-md motion-safe:hover:-translate-x-0.5 motion-safe:transition">
+            class="bg-red-600 text-white h-12 w-24 px-4 rounded-md  md:shadow-md motion-safe:hover:-translate-x-0.5 motion-safe:transition">
           Search 
              </button>
         </div>

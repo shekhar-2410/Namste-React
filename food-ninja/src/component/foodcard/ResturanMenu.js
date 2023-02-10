@@ -12,23 +12,40 @@ const RestaurantMenu = () => {
   return !restaurant ? (
     <Simmer />
   ) : (
-    <div className="menu">
-      <div>
-        <h1>Restraunt id: {resId}</h1>
-        <h2>{restaurant?.name}</h2>
-        <img src={IMG_Url  + restaurant?.cloudinaryImageId} />
-        <h3>{restaurant?.area}</h3>
-        <h3>{restaurant?.city}</h3>
-        <h3>{restaurant?.avgRating} stars</h3>
-        <h3>{restaurant?.costForTwoMsg}</h3>
+    <div className="menu  mt-2">
+      <div className="h-auto static py-16 bg-blue-900">
+
+        <img className=" w-[250px] mt   ml-24 absolute " src={IMG_Url  + restaurant?.cloudinaryImageId} />
+
+        <div className="ml-[400px]">
+        <h1 className="text-white text-4xl my-2">{restaurant?.name}</h1>
+        <h3 className="  text-gray-300 my-2">{restaurant?.area}</h3>
+        <h3 className=" text-gray-300 my-2">{restaurant?.city}</h3>
+        <h3 className=" text-gray-300 my-2"> <span className="mr-1">{restaurant?.costForTwoMsg } | </span> {restaurant?.avgRating} ⭐</h3>
+        {/* <h3 className=" text-gray-300">  {restaurant?.costForTwoMsg }</h3> */}
+        </div>
+       
+
+       
       </div>
-      <div>
-        <h1>Menu</h1>
-        <ul>
+      <div className="flex flex-wrap ">
+       
+      
           {Object.values(restaurant?.menu?.items).map((item) => (
-            <li key={item.id}>{item.name}</li>
+            
+            <div key={item.id} className="w-[250px] rounded  shadow-xl m-2 border">
+            <img class="w-full" src={IMG_Url+item?.cloudinaryImageId} alt="Food image"/>
+            <div class="px-6 py-4">
+              <div class="font-bold text-lg mb-2">{item?.name}</div>
+              <p class="text-gray-700 text-sm">
+               {item?.description}
+              </p>
+            </div>
+            
+          </div>
+
           ))}
-        </ul>
+       
       </div>
     </div>
   );

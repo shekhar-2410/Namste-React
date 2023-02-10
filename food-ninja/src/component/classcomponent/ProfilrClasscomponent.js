@@ -1,37 +1,67 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class ProfilrClasscomponent extends Component {
+class Profile extends React.Component {
 	constructor(props) {
 		super(props);
+		// Create State
 		this.state = {
-			count: 0
+			userInfo: {
+				name: 'Dummy Name',
+				location: 'Dummy Location'
+			}
 		};
+		//console.log("Child - Constructor" + this.props.name);
 	}
 
-	async componentDidMount() {
-		//called api
-		const data = await fetch('');
-		const json = await data.json();
+	componentDidMount() {
+		this.timer = setInterval(() => {
+			console.log('NAMASTE REACT OP ');
+		}, 1000);
+
+		//console.log("Child - componentDidMount");
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.count !== prevState.count) {
+			//
+		}
+		if (this.state.count2 !== prevState.count2) {
+			// code
+		}
+		console.log('Component Did Update');
+	}
+	componentWillUnmount() {
+		clearInterval(this.timer);
+		//console.log("ComponentWillUnmount");
+	}
+
 	render() {
-		// let { count } = this.state.count;
+		const { count } = this.state;
+		//console.log("Child - render" + this.props.name);
 		return (
 			<div>
-				<h1>ProfilrClasscomponent</h1>
-				<h2>Name:{this.props.name}</h2>
-				<p>Count:{this.state.count}</p>
-				{/* <button
-					onClick={() => {
-						this.setState({
-							count: this.state.count + 1
-						});
-					}}
-				>
-					Count plus
-				</button> */}
+				<h1> Profile Class Component </h1>
+				<img src={this.state.userInfo.avatar_url} />
+				<h2>Name: {this.state.userInfo.name}</h2>
+				<h2>Location: {this.state.userInfo.location}</h2>
 			</div>
 		);
 	}
 }
 
-export default ProfilrClasscomponent;
+/**
+ *
+ *  child constructor
+ *  child render
+ *  child componentDidMount
+ *
+ *  API call
+ *  Set State
+ *
+ *  <UPDATE CYCLES>
+ *  render
+ *
+ *
+ */
+
+export default Profile;
